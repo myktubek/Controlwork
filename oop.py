@@ -1,20 +1,23 @@
-from abc import ABC, abstractmethod
-import math
-
-# 1. Инкапсуляция — класс Person
+# 1. Инкапсуляция
 class Person:
     def __init__(self):
-        self._age = None  # приватный атрибут
+        self._age = 0
 
     def set_age(self, age):
-        if age < 0:
-            raise ValueError("Возраст не может быть отрицательным!")
-        self._age = age
+        if age >= 0:
+            self._age = age
+        else:
+            raise ValueError("Возраст не может быть отрицательным")
 
     def get_age(self):
         return self._age
 
-# 2. Наследование — классы Animal, Dog, Cat
+p = Person()
+p.set_age(25)
+print("Инкапсуляция:", p.get_age())
+
+
+# 2. Наследование
 class Animal:
     def __init__(self, name):
         self.name = name
@@ -30,7 +33,12 @@ class Cat(Animal):
     def speak(self):
         return "Meow"
 
-# 3. Полиморфизм — Vehicle, Car, Bicycle и функция move()
+dog = Dog("Buddy")
+cat = Cat("Kitty")
+print("Наследование:", dog.name, dog.speak())
+print("Наследование:", cat.name, cat.speak())
+
+# 3. Полиморфизм
 class Vehicle:
     def move(self):
         return "Vehicle is moving"
@@ -46,50 +54,11 @@ class Bicycle(Vehicle):
 def move(vehicle):
     return vehicle.move()
 
-# 4. Абстракция — абстрактный класс Shape, Rectangle и Circle
-class Shape(ABC):
-    @abstractmethod
-    def area(self):
-        pass
 
-class Rectangle(Shape):
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
+car = Car()
+bike = Bicycle()
+print("Полиморфизм:", move(car))
+print("Полиморфизм:", move(bike))
 
-    def area(self):
-        return self.width * self.height
+# 4. Абстракция не смог
 
-class Circle(Shape):
-    def __init__(self, radius):
-        self.radius = radius
-
-    def area(self):
-        return math.pi * self.radius ** 2
-
-# --- Примеры использования всех классов и функций ---
-
-if __name__ == "__main__":
-    # Тест инкапсуляции
-    p = Person()
-    p.set_age(25)
-    print("Person age:", p.get_age())
-    # p.set_age(-5)  # раскомментируй — будет ошибка
-
-    # Тест наследования
-    dog = Dog("Buddy")
-    cat = Cat("Kitty")
-    print(dog.name, dog.speak())
-    print(cat.name, cat.speak())
-
-    # Тест полиморфизма
-    car = Car()
-    bike = Bicycle()
-    print(move(car))
-    print(move(bike))
-
-    # Тест абстракции
-    rect = Rectangle(10, 5)
-    circle = Circle(7)
-    print("Rectangle area:", rect.area())
-    print("Circle area:", round(circle.area(), 2))
