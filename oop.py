@@ -23,15 +23,15 @@ class Animal:
         self.name = name
 
     def speak(self):
-        return "I am an animal"
+        return "Животные"
 
 class Dog(Animal):
     def speak(self):
-        return "Woof"
+        return "вув"
 
 class Cat(Animal):
     def speak(self):
-        return "Meow"
+        return "миу"
 
 dog = Dog("Buddy")
 cat = Cat("Kitty")
@@ -41,15 +41,15 @@ print("Наследование:", cat.name, cat.speak())
 # 3. Полиморфизм
 class Vehicle:
     def move(self):
-        return "Vehicle is moving"
+        return "движется"
 
 class Car(Vehicle):
     def move(self):
-        return "Car is driving"
+        return "машина едит"
 
 class Bicycle(Vehicle):
     def move(self):
-        return "Bicycle is pedaling"
+        return "велосипед едит"
 
 def move(vehicle):
     return vehicle.move()
