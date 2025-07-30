@@ -5,7 +5,7 @@ class Person:
 
     def set_age(self, age):
         if age >= 0:
-            self._age = age
+            self._age =age
         else:
             raise ValueError("Возраст не может быть отрицательным")
 
@@ -14,7 +14,7 @@ class Person:
 
 p = Person()
 p.set_age(25)
-print("Инкапсуляция:", p.get_age())
+print(p.get_age())
 
 
 # 2. Наследование
@@ -27,16 +27,16 @@ class Animal:
 
 class Dog(Animal):
     def speak(self):
-        return "вув"
+        return "Woof"
 
 class Cat(Animal):
     def speak(self):
-        return "миу"
+        return "Meow"
 
 dog = Dog("Buddy")
 cat = Cat("Kitty")
-print("Наследование:", dog.name, dog.speak())
-print("Наследование:", cat.name, cat.speak())
+print(dog.name, dog.speak())
+print(cat.name, cat.speak())
 
 # 3. Полиморфизм
 class Vehicle:
@@ -45,11 +45,11 @@ class Vehicle:
 
 class Car(Vehicle):
     def move(self):
-        return "машина едит"
+        return "Car is driving"
 
 class Bicycle(Vehicle):
     def move(self):
-        return "велосипед едит"
+        return "Bicycle is pedaling"
 
 def move(vehicle):
     return vehicle.move()
@@ -57,7 +57,36 @@ def move(vehicle):
 
 car = Car()
 bike = Bicycle()
-print("Полиморфизм:", move(car))
-print("Полиморфизм:", move(bike))
+print(move(car))
+print(move(bike))
 
-# 4. Абстракция не смог
+
+# 4. Абстракция
+from abc import ABC, abstractmethod
+import math
+
+class Shape(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+class Rectangle(Shape):
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+
+    def area(self):
+        return self.width * self.height
+
+class Circle(Shape):
+    def __init__(self, radius):
+        self.radius = radius
+
+    def area(self):
+        return math.pi * self.radius * self.radius
+
+rect = Rectangle(10, 5)
+circle = Circle(7)
+
+print(rect.area())  # Вывод: 50
+print(circle.area())  # Вывод: ~153.94
